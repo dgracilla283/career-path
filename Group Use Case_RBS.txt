@@ -1,0 +1,71 @@
+CREATE EXTERNAL TABLE sf_compensation_temp (
+year_type STRING,
+year STRING,
+organization_group_code STRING,
+organization_group STRING,
+department_code STRING,
+department STRING,
+union_code STRING,
+union STRING,
+job_family_code STRING,
+job_family STRING,
+job_code STRING,
+job STRING,
+employee_identifier STRING,
+salaries DECIMAL(12,2),
+overtime DECIMAL(12,2),
+other_salaries DECIMAL(12,2),
+total_salary DECIMAL(12,2),
+retirement DECIMAL(12,2),
+health_dental DECIMAL(12,2),
+other_benefits DECIMAL(12,2),
+total_benefits DECIMAL(12,2),
+total_compensation DECIMAL(12,2)
+)
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+  LOCATION '/user/cloudera/sf_compensation';
+
+CREATE TABLE sf_compensation
+partitioned by year
+stored as parquet
+LOCATION '/user/cloudera/sf_compensation'
+as select * from sf_compensation_temp;
+
+
+select job_code, total_compensation, 
+from sf_compensation
+group by job_code
+order by total_compensation;
+
+
+	    ip STRING,
+
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+
+CREATE EXTERNAL TABLE sf_compensation_temp (
+year_type STRING,
+year STRING,
+organization_group_code STRING,
+organization_group STRING,
+department_code STRING,
+department STRING,
+union_code STRING,
+union STRING,
+job_family_code STRING,
+job_family STRING,
+job_code STRING,
+job STRING,
+employee_identifier STRING,
+salaries  STRING,
+overtime  STRING,
+other_salaries  STRING,
+total_salary  STRING,
+retirement  STRING,
+health_dental STRING,
+other_benefits STRING,
+total_benefits STRING,
+total_compensation STRING
+)
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+  STORED AS PARQUET
+  LOCATION '/user/cloudera/sf_compensation_samp';
